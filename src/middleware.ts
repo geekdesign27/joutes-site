@@ -1,13 +1,13 @@
 import { defineMiddleware } from "astro:middleware";
 
+const PUBLIC_URL =
+  import.meta.env.KEYSTATIC_URL || "https://joutesinterpompiers2026.ch";
+
 /**
  * Sur Vercel, request.url arrive parfois avec hostname=localhost dans les
  * Serverless Functions, ce qui casse la construction du redirect_uri OAuth
  * de Keystatic. On force ici l'origine correcte pour les routes Keystatic.
  */
-const PUBLIC_URL =
-  import.meta.env.KEYSTATIC_URL || "https://joutesinterpompiers2026.ch";
-
 export const onRequest = defineMiddleware(async (ctx, next) => {
   const path = ctx.url.pathname;
   const isKeystatic =
