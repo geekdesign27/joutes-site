@@ -9,7 +9,7 @@ import keystatic from '@keystatic/astro';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://joutesinterpompiers2026.ch',
-  output: 'static',
+  output: 'server',
   adapter: vercel(),
   integrations: [react(), keystatic(), sitemap()],
   vite: {

@@ -1,12 +1,8 @@
 ---
+export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GridBackground from '../components/GridBackground.astro';
 import Footer from '../components/Footer.astro';
-import { Markdoc } from '@astrojs/markdoc/components';
-import mentions from '../content/sections/mentions-legales.json';
-
-// Import the markdoc content - will be transformed by Astro
-import { renderers } from '@astrojs/markdoc/runtime';
 ---
 <BaseLayout pageTitle="Mentions légales — Joutes Inter-Pompiers de la Sarine 2026">
   <main class="legal">
