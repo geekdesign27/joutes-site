@@ -1,0 +1,7 @@
+---
+interface Props {
+  variant?: 'light' | 'dark';
+}
+const { variant = 'light' } = Astro.props;
+---
+<div class="grid-bg" data-variant={variant} aria-hidden="true"></div>

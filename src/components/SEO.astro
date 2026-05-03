@@ -1,0 +1,64 @@
+---
+import siteData from '../content/settings/site.json';
+
+interface Props {
+  pageTitle?: string;
+  pageDescription?: string;
+}
+const { pageTitle, pageDescription } = Astro.props;
+
+const title = pageTitle || siteData.title;
+const description = pageDescription || siteData.description;
+const url = Astro.site?.toString() || 'https://joutesinterpompiers2026.ch/';
+const ogImage = new URL('/og.png', url).toString();
+
+// JSON-LD Event schema (R9)
+const eventSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: siteData.title,
+  startDate: siteData.eventDate,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  location: {
+    '@type': 'Place',
+    name: siteData.eventLocation,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Villars-sur-Glâne',
+      addressRegion: 'FR',
+      addressCountry: 'CH',
+    },
+  },
+  organizer: {
+    '@type': 'Organization',
+    name: siteData.organizationName,
+    url,
+  },
+  description: siteData.description,
+  image: ogImage,
+};
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={url} />
+<meta name="author" content={siteData.organizationName} />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:url" content={url} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="fr_CH" />
+<meta property="og:site_name" content="Joutes Inter-Pompiers de la Sarine" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- JSON-LD Event -->
+<script type="application/ld+json" is:inline set:html={JSON.stringify(eventSchema)} />

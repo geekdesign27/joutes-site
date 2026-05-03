@@ -1,0 +1,74 @@
+---
+interface Props {
+  name: string;
+  url: string;
+  logo: string;
+  recolor?: boolean;
+}
+const { name, url, logo, recolor = true } = Astro.props;
+---
+<div class="sponsor">
+  <div class="sponsor-logo">
+    <img
+      src={logo}
+      alt={`Logo ${name}`}
+      class:list={[{ 'filter-orange': recolor }]}
+      loading="lazy"
+    />
+  </div>
+  <a class="sponsor-link" href={url} target="_blank" rel="noopener noreferrer">
+    Visiter le site →
+  </a>
+</div>
+
+<style>
+  .sponsor {
+    position: relative;
+    width: var(--cell-w);
+    height: var(--cell-h);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    transition: background .25s;
+    cursor: pointer;
+  }
+  .sponsor:hover {
+    background: rgba(232,116,44,.06);
+  }
+  .sponsor-logo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .sponsor-logo img {
+    max-width: 160px;
+    max-height: 160px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: .7;
+    transition: opacity .25s;
+  }
+  .sponsor:hover .sponsor-logo img {
+    opacity: 1;
+  }
+  .sponsor-link {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+  .sponsor-link:hover {
+    color: var(--color-orange);
+  }
+</style>

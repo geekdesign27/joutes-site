@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+/* ====================================================== */
+/*           DESIGN TOKENS (Tailwind v4 @theme)            */
+/* ====================================================== */
+@theme {
+  /* Couleurs */
+  --color-orange: #E8742C;
+  --color-orange-bright: #F39433;
+  --color-orange-soft: #F2A85A;
+  --color-rouge: #9B2A1F;
+  --color-bleu-nuit: #1B2447;
+  --color-bleu-profond: #0F1530;
+  --color-cream: #F4EFE6;
+  --color-ink: #1A1A1A;
+  --color-cream-soft: #F4D9B6;
+
+  /* Polices */
+  --font-display: 'Oswald', sans-serif;
+  --font-body: 'Bitter', Georgia, serif;
+}
+
+/* ====================================================== */
+/*               GRILLE — Variables CSS                     */
+/*  Approche audit : sections multiples de --cell-h         */
+/*  pour que la grille apparaisse continue sans JS.         */
+/*  R6 : aucun background-attachment fixed (bug iOS).       */
+/*  R7 : breakpoints fidèles à la maquette source.          */
+/* ====================================================== */
+:root {
+  --cell-w: 200px;
+  --cell-h: 285px;
+  --grid-line-light: rgba(27, 36, 71, 0.10);
+  --grid-dot-light:  rgba(27, 36, 71, 0.55);
+  --grid-line-dark:  rgba(255, 255, 255, 0.10);
+  --grid-dot-dark:   rgba(255, 200, 150, 0.55);
+}
+
+/* Breakpoint maquette : ≤960px → cellule fluide, typo réduite */
+@media (max-width: 960px) {
+  :root {
+    --cell-w: calc(100vw / 6);
+    --cell-h: calc(var(--cell-w) * 1.425);
+  }
+}
+
+/* ====================================================== */
+/*                       BASE                              */
+/* ====================================================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* H1 accessible (R8) — texte plain pour Google, spans visuels en aria-hidden */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ====================================================== */
+/*              GRID BACKGROUND (lignes + points)           */
+/* ====================================================== */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    linear-gradient(to right, var(--gline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--gline) 1px, transparent 1px),
+    radial-gradient(circle at 0 0, var(--gdot) 1.8px, transparent 2.6px);
+  background-size:
+    var(--cell-w) var(--cell-h),
+    var(--cell-w) var(--cell-h),
+    var(--cell-w) var(--cell-h);
+  background-position: 0 0, 0 0, 0 0;
+  background-repeat: repeat;
+}
+
+.grid-bg[data-variant="light"] {
+  --gline: var(--grid-line-light);
+  --gdot:  var(--grid-dot-light);
+}
+
+.grid-bg[data-variant="dark"] {
+  --gline: var(--grid-line-dark);
+  --gdot:  var(--grid-dot-dark);
+}
+
+/* ====================================================== */
+/*                   WRAP CONTAINER                        */
+/*  6 colonnes × 200px = 1200px max, centré                */
+/* ====================================================== */
+.wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 1280px) {
+  .wrap {
+    padding: 0 0;
+  }
+}
+
+/* Grille à 6 colonnes pour layouts internes */
+.row-6 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  column-gap: 0;
+}
+
+/* ====================================================== */
+/*                   TYPO SYSTEM                            */
+/* ====================================================== */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 0.92;
+}
+
+.display-light {
+  font-family: var(--font-display);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 0.95;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  background: currentColor;
+}
+
+p, .body {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+/* ====================================================== */
+/*           FILTER ORANGE pour logos (R10)                 */
+/* ====================================================== */
+.filter-orange {
+  filter: brightness(0) saturate(100%) invert(60%) sepia(60%) saturate(1300%) hue-rotate(350deg) brightness(101%) contrast(95%);
+}
+
+/* ====================================================== */
+/*                     RESPONSIVE                          */
+/*  Reproduction fidèle des breakpoints maquette source    */
+/* ====================================================== */
+@media (max-width: 960px) {
+  .row-6 { grid-template-columns: 1fr !important; gap: 40px; }
+  .row-6 > * { grid-column: 1 / -1 !important; padding-right: 0 !important; }
+}
+
+@media (max-width: 480px) {
+  /* Compensation des limites mobiles de la maquette source */
+  .eyebrow { font-size: 11px; }
+}

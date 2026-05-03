@@ -1,0 +1,137 @@
+---
+import GridBackground from './GridBackground.astro';
+import SponsorCard from './SponsorCard.astro';
+import { getCollection } from 'astro:content';
+
+// Tente de récupérer la collection Astro Content; sinon lit le dossier directement
+let sponsors: Array<{
+  name: string;
+  url: string;
+  logo: string;
+  recolor: boolean;
+  order: number;
+}> = [];
+
+try {
+  const all = await getCollection('sponsors' as never);
+  // @ts-expect-error - dynamic collection access
+  sponsors = all.map((s) => ({ ...s.data, name: s.id })).sort((a, b) => a.order - b.order);
+} catch {
+  // Fallback : import direct des JSON via import.meta.glob
+  const modules = import.meta.glob<{
+    default: { name: string; url: string; logo: string; recolor: boolean; order: number };
+  }>('../content/sponsors/*.json', { eager: true });
+  sponsors = Object.values(modules)
+    .map((m) => m.default)
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+}
+---
+<section class="sponsors" id="sponsors">
+  <GridBackground variant="light" />
+  <div class="wrap">
+    <div class="sponsors-head">
+      <div>
+        <div class="eyebrow">Partenaires</div>
+        <h2>
+          Nos sponsors
+          <span class="sub">Ils nous accompagnent</span>
+        </h2>
+      </div>
+      <p>
+        Les Joutes Inter-Pompiers de la Sarine ne pourraient exister sans le soutien précieux de nos partenaires. Entreprises locales et acteurs engagés contribuent activement à la réussite de cette manifestation, en partageant des valeurs communes : engagement, solidarité et esprit d'équipe.
+      </p>
+    </div>
+    <div class="sponsor-grid">
+      {sponsors.map((s) => (
+        <SponsorCard name={s.name} url={s.url} logo={s.logo} recolor={s.recolor} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sponsors {
+    position: relative;
+    background: var(--color-cream);
+    padding: calc(var(--cell-h) * 0.5) 0;
+    overflow: hidden;
+    min-height: calc(var(--cell-h) * 4);
+  }
+  .sponsors-head {
+    position: relative;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 0;
+    margin-bottom: calc(var(--cell-h) * 0.25);
+    align-items: end;
+  }
+  .sponsors-head > div:first-child {
+    grid-column: 1 / span 3;
+    padding-right: 40px;
+  }
+  .sponsors-head > p {
+    grid-column: 4 / span 3;
+  }
+  .sponsors-head :global(.eyebrow) {
+    color: var(--color-orange);
+  }
+  .sponsors h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 88px;
+    line-height: .92;
+    color: var(--color-orange);
+    text-transform: uppercase;
+  }
+  .sponsors h2 .sub {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 300;
+    color: var(--color-ink);
+    font-size: 42px;
+    margin-top: 6px;
+  }
+  .sponsors-head p {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #3a342c;
+    max-width: 520px;
+    text-wrap: pretty;
+  }
+
+  /* Grille de sponsors auto-fit (R7 : peut grandir au-delà de 12) */
+  .sponsor-grid {
+    position: relative;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, var(--cell-w));
+    justify-content: center;
+  }
+
+  @media (max-width: 960px) {
+    .sponsors-head {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .sponsors-head > div:first-child,
+    .sponsors-head > p {
+      grid-column: 1 / -1;
+      padding-right: 0;
+    }
+    .sponsors h2 { font-size: 54px; }
+    .sponsors h2 .sub { font-size: 28px; }
+    .sponsor-grid {
+      grid-template-columns: repeat(2, var(--cell-w));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .sponsors h2 { font-size: 42px; }
+    .sponsor-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

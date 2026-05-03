@@ -1,0 +1,95 @@
+---
+import GridBackground from './GridBackground.astro';
+import Scoreboard from './Scoreboard.astro';
+import data from '../content/sections/match.json';
+---
+<section class="match" id="match">
+  <GridBackground variant="dark" />
+  <div class="wrap match-inner">
+    <div class="match-text">
+      <div class="eyebrow">{data.eyebrow}</div>
+      <h2 set:html={data.title.replace(/\n/g, '<br/>')} />
+      <p class="match-copy">
+        {data.body} <strong>{data.callout}</strong>
+      </p>
+    </div>
+    <div class="match-scoreboard-wrap">
+      <Scoreboard kickoff={data.kickoff} location={data.location} entry={data.entry} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .match {
+    position: relative;
+    color: #fff;
+    overflow: hidden;
+    isolation: isolate;
+    min-height: calc(var(--cell-h) * 3);
+    background:
+      radial-gradient(60% 90% at 0% 50%, rgba(255,180,90,.55) 0%, rgba(255,180,90,0) 55%),
+      radial-gradient(80% 120% at 80% 20%, rgba(11,14,40,.5) 0%, rgba(11,14,40,0) 50%),
+      radial-gradient(60% 100% at 100% 100%, rgba(11,14,40,.6) 0%, rgba(11,14,40,0) 60%),
+      linear-gradient(95deg, #F39433 0%, #B83A28 22%, #6F1D2E 45%, #2B2347 72%, #1B2447 100%);
+  }
+  .match-inner {
+    position: relative;
+    z-index: 5;
+    padding: calc(var(--cell-h) * 0.5) 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 0;
+    align-items: center;
+    min-height: calc(var(--cell-h) * 3);
+  }
+  .match-text {
+    grid-column: 1 / span 4;
+    padding-right: 60px;
+  }
+  .match-scoreboard-wrap {
+    grid-column: 5 / span 2;
+  }
+  .match-inner :global(.eyebrow) {
+    color: var(--color-cream-soft);
+  }
+  .match h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 104px;
+    line-height: .92;
+    color: var(--color-orange-bright);
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+  }
+  .match-copy {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--color-cream-soft);
+    max-width: 560px;
+    margin-top: 28px;
+    text-wrap: pretty;
+  }
+  .match-copy strong {
+    color: var(--color-cream-soft);
+    font-weight: 600;
+  }
+
+  @media (max-width: 960px) {
+    .match-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .match-text, .match-scoreboard-wrap {
+      grid-column: 1 / -1;
+      padding-right: 0;
+    }
+    .match h2 { font-size: 56px; }
+  }
+
+  @media (max-width: 480px) {
+    .match h2 { font-size: 42px; }
+    .match-copy { font-size: 16px; }
+  }
+</style>

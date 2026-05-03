@@ -1,0 +1,137 @@
+---
+interface Props {
+  kickoff: string;
+  location: string;
+  entry: string;
+}
+const { kickoff, location, entry } = Astro.props;
+---
+<div class="scoreboard">
+  <div class="score-row">
+    <div class="team swiss">
+      <div class="flag" aria-label="Drapeau Suisse"></div>
+      <div class="team-name">Suisse</div>
+    </div>
+    <div class="vs">VS</div>
+    <div class="team qatar">
+      <div class="flag" aria-label="Drapeau Qatar">QAT</div>
+      <div class="team-name">Qatar</div>
+    </div>
+  </div>
+  <hr/>
+  <div class="kickoff">
+    <div>Coup d'envoi<span class="v">{kickoff}</span></div>
+    <div>Lieu<span class="v">{location}</span></div>
+    <div>Entrée<span class="v">{entry}</span></div>
+  </div>
+</div>
+
+<style>
+  .scoreboard {
+    position: relative;
+    width: 100%;
+    max-width: 398px;
+    border: 1px solid rgba(244,217,182,.22);
+    background: rgba(11,14,40,.18);
+    backdrop-filter: blur(2px);
+    padding: 36px 32px;
+  }
+  .score-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+  .team {
+    text-align: center;
+    flex: 1;
+  }
+  .flag {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(244,217,182,.35);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: #fff;
+  }
+  .team.swiss .flag {
+    background: #D52B1E;
+  }
+  .team.swiss .flag::before {
+    content: "";
+    width: 32px;
+    height: 8px;
+    background: #fff;
+    position: absolute;
+  }
+  .team.swiss .flag::after {
+    content: "";
+    width: 8px;
+    height: 32px;
+    background: #fff;
+    position: absolute;
+  }
+  .team.qatar .flag {
+    background: #8A1538;
+    font-size: 14px;
+    letter-spacing: .18em;
+  }
+  .team-name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #fff;
+  }
+  .vs {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 36px;
+    color: var(--color-orange-bright);
+  }
+  .scoreboard hr {
+    border: none;
+    border-top: 1px dashed rgba(244,217,182,.25);
+    margin: 28px 0 22px;
+  }
+  .kickoff {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--color-cream-soft);
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: .18em;
+  }
+  .kickoff > div {
+    flex: 1;
+    min-width: 0;
+  }
+  .kickoff .v {
+    color: #fff;
+    display: block;
+    font-size: 22px;
+    margin-top: 6px;
+    letter-spacing: .04em;
+    font-weight: 500;
+    word-break: break-word;
+  }
+
+  @media (max-width: 480px) {
+    .scoreboard { padding: 24px 20px; }
+    .flag { width: 56px; height: 56px; }
+    .team-name { font-size: 18px; }
+    .vs { font-size: 28px; }
+    .kickoff .v { font-size: 18px; }
+  }
+</style>

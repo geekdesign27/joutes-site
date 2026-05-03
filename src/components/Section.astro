@@ -1,0 +1,36 @@
+---
+import GridBackground from './GridBackground.astro';
+
+interface Props {
+  id?: string;
+  variant?: 'light' | 'dark';
+  class?: string;
+  /** Hauteur en multiple de --cell-h pour aligner sur la grille (R6) */
+  cellHeight?: number;
+  /** Hauteur min plutôt que fixe */
+  minCellHeight?: number;
+}
+const {
+  id,
+  variant = 'light',
+  class: className = '',
+  cellHeight,
+  minCellHeight,
+} = Astro.props;
+
+const styleAttr = cellHeight
+  ? `height: calc(var(--cell-h) * ${cellHeight});`
+  : minCellHeight
+    ? `min-height: calc(var(--cell-h) * ${minCellHeight});`
+    : '';
+---
+<section
+  id={id}
+  class:list={['relative overflow-hidden isolate', className]}
+  style={styleAttr}
+>
+  <GridBackground variant={variant} />
+  <div class="wrap relative z-10 h-full">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,97 @@
+---
+import GridBackground from './GridBackground.astro';
+import data from '../content/sections/ouvert-a-tous.json';
+---
+<section class="open-section" id="programme">
+  <GridBackground variant="light" />
+  <div class="wrap open-inner">
+    <div class="open-head">
+      <div class="eyebrow">{data.eyebrow}</div>
+      <h2 set:html={data.title.replace(/\n/g, '<br/>')} />
+      <h3>{data.subtitle}</h3>
+    </div>
+    <div class="open-copy">
+      <p>{data.paragraph1}</p>
+      <p>{data.paragraph2}</p>
+      <p>{data.paragraph3}</p>
+      <p><strong>{data.callout}</strong></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .open-section {
+    position: relative;
+    background: var(--color-cream);
+    padding: calc(var(--cell-h) * 0.5) 0;
+    overflow: hidden;
+    min-height: calc(var(--cell-h) * 3);
+  }
+  .open-inner {
+    position: relative;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 0;
+    align-items: start;
+  }
+  .open-head {
+    grid-column: 1 / span 2;
+    padding-right: 40px;
+  }
+  .open-copy {
+    grid-column: 3 / span 4;
+  }
+  .open-inner :global(.eyebrow) {
+    color: var(--color-orange);
+  }
+  .open-section h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 88px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+  .open-section h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.1;
+    color: var(--color-orange);
+    margin-top: 14px;
+  }
+  .open-copy p {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.65;
+    color: #3a342c;
+    max-width: 600px;
+    margin-bottom: 20px;
+    text-wrap: pretty;
+  }
+  .open-copy strong {
+    color: var(--color-orange);
+    font-weight: 600;
+  }
+
+  @media (max-width: 960px) {
+    .open-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .open-head, .open-copy {
+      grid-column: 1 / -1;
+      padding-right: 0;
+    }
+    .open-section h2 { font-size: 54px; }
+    .open-section h3 { font-size: 28px; }
+  }
+
+  @media (max-width: 480px) {
+    .open-section h2 { font-size: 42px; }
+    .open-section h3 { font-size: 24px; }
+    .open-copy p { font-size: 16px; }
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GridBackground from '../components/GridBackground.astro';
+import Footer from '../components/Footer.astro';
+import { Markdoc } from '@astrojs/markdoc/components';
+import mentions from '../content/sections/mentions-legales.json';
+
+// Import the markdoc content - will be transformed by Astro
+import { renderers } from '@astrojs/markdoc/runtime';
+---
+<BaseLayout pageTitle="Mentions légales — Joutes Inter-Pompiers de la Sarine 2026">
+  <main class="legal">
+    <GridBackground variant="light" />
+    <div class="wrap legal-wrap">
+      <a href="/" class="back">← Retour à l'accueil</a>
+      <h1>Mentions légales</h1>
+      <div class="legal-content">
+        <h2>Éditeur du site</h2>
+        <p>
+          <strong>Compagnie des Sapeurs-Pompiers de Moncor</strong><br />
+          CP Moncor, Rte de Chandolan 1<br />
+          1752 Villars-sur-Glâne<br />
+          Suisse
+        </p>
+        <h2>Hébergement</h2>
+        <p>
+          Site hébergé par <strong>Vercel Inc.</strong>, 340 S Lemon Ave #4133, Walnut, CA 91789, USA — <a href="https://vercel.com">vercel.com</a>
+        </p>
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          L'ensemble des contenus présents sur ce site (textes, logos, images, design) est la propriété de la Compagnie des Sapeurs-Pompiers de Moncor ou de leurs partenaires respectifs. Toute reproduction, même partielle, est soumise à autorisation écrite préalable.
+        </p>
+        <h2>Données personnelles</h2>
+        <p>
+          Ce site n'enregistre aucune donnée personnelle directement. Une mesure d'audience anonymisée via Google Analytics 4 est activée uniquement après votre consentement explicite (bannière cookies). Vous pouvez modifier votre choix à tout moment.
+        </p>
+        <h2>Cookies</h2>
+        <p>
+          Cookies de mesure d'audience optionnels (Google Analytics 4 — anonymisé). Cookies strictement nécessaires uniquement pour le fonctionnement du site.
+        </p>
+        <h2>Contact</h2>
+        <p>
+          Pour toute question relative au présent site, contactez la Compagnie des Sapeurs-Pompiers de Moncor via les réseaux sociaux liés en pied de page.
+        </p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal {
+    position: relative;
+    background: var(--color-cream);
+    min-height: calc(var(--cell-h) * 4);
+    padding: calc(var(--cell-h) * 0.5) 0;
+    overflow: hidden;
+  }
+  .legal-wrap {
+    position: relative;
+    z-index: 5;
+    max-width: 800px;
+  }
+  .back {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-orange);
+    text-decoration: none;
+    margin-bottom: 32px;
+  }
+  .back:hover {
+    color: var(--color-rouge);
+  }
+  .legal h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--color-ink);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  .legal-content h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--color-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+  .legal-content p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.7;
+    color: #3a342c;
+    margin-bottom: 16px;
+  }
+  .legal-content a {
+    color: var(--color-orange);
+  }
+
+  @media (max-width: 480px) {
+    .legal h1 { font-size: 42px; }
+  }
+</style>
