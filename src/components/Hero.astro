@@ -55,7 +55,7 @@ const heroBgUrl = heroData.backgroundImage || '';
     overflow: hidden;
     isolation: isolate;
     color: #fff;
-    height: calc(var(--cell-h) * 3);
+    height: calc(var(--cell-h) * 2.5);
     background:
       radial-gradient(70% 60% at 12% 75%, rgba(243,148,51,.55) 0%, rgba(243,148,51,0) 60%),
       radial-gradient(80% 70% at 100% 30%, rgba(11,14,40,.65) 0%, rgba(11,14,40,0) 60%),
@@ -77,7 +77,7 @@ const heroBgUrl = heroData.backgroundImage || '';
     height: 100%;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: var(--cell-h) auto;
+    grid-template-rows: var(--cell-h) calc(var(--cell-h) * 1.5);
   }
   .nav {
     grid-column: 1 / -1;
