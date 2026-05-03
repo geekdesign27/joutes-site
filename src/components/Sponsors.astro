@@ -53,10 +53,10 @@ try {
   .sponsors {
     position: relative;
     background: var(--color-cream);
-    padding: var(--cell-h) 0 calc(var(--cell-h) * 0.5);
+    padding: calc(var(--cell-h) * 0.5) 0;
     overflow: hidden;
-    /* hauteur totale = 1 (pad top) + 1 (head) + 2 (grid) + 0.5 (pad bottom) = 4.5 cell-h
-       sponsor-grid commence à 2 cell-h depuis top section → aligné sur la grille */
+    /* hauteur totale = 0.5 (pad top) + 1 (head) + 2 (grid) + 0.5 (pad bottom) = 4 cell-h
+       sponsor-grid commence à 1.5 cell-h depuis top section */
   }
   .sponsors-head {
     position: relative;
