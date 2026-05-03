@@ -35,7 +35,7 @@ import data from '../content/sections/match.json';
   .match-inner {
     position: relative;
     z-index: 5;
-    padding: calc(var(--cell-h) * 0.5) 0;
+    padding-block: calc(var(--cell-h) * 0.5);
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     column-gap: 0;
@@ -79,7 +79,7 @@ import data from '../content/sections/match.json';
   @media (max-width: 960px) {
     .match { min-height: 0; }
     .match-inner {
-      padding: 56px 0;
+      padding-block: 56px;
       grid-template-columns: 1fr;
       gap: 32px;
       min-height: 0;
@@ -97,7 +97,7 @@ import data from '../content/sections/match.json';
   }
 
   @media (max-width: 480px) {
-    .match-inner { padding: 40px 0; }
+    .match-inner { padding-block: 40px; }
     .match h2 { font-size: 36px; }
     .match-copy { font-size: 16px; margin-top: 20px; }
   }
