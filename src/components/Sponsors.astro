@@ -53,9 +53,10 @@ try {
   .sponsors {
     position: relative;
     background: var(--color-cream);
-    padding: calc(var(--cell-h) * 0.5) 0;
+    padding: var(--cell-h) 0 calc(var(--cell-h) * 0.5);
     overflow: hidden;
-    /* hauteur totale = 0.5 (pad top) + 1.5 (head) + 2 (grid) + 0.5 (pad bottom) = 4.5 cell-h */
+    /* hauteur totale = 1 (pad top) + 1 (head) + 2 (grid) + 0.5 (pad bottom) = 4.5 cell-h
+       sponsor-grid commence à 2 cell-h depuis top section → aligné sur la grille */
   }
   .sponsors-head {
     position: relative;
@@ -63,7 +64,7 @@ try {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     column-gap: 0;
-    height: calc(var(--cell-h) * 1.5);
+    height: var(--cell-h);
     margin-bottom: 0;
     align-items: center;
   }
