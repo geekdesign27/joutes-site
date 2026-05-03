@@ -1,10 +1,8 @@
 ---
 interface Props {
   kickoff: string;
-  location: string;
-  entry: string;
 }
-const { kickoff, location, entry } = Astro.props;
+const { kickoff } = Astro.props;
 ---
 <div class="scoreboard">
   <div class="score-row">
@@ -20,9 +18,8 @@ const { kickoff, location, entry } = Astro.props;
   </div>
   <hr/>
   <div class="kickoff">
-    <div>Coup d'envoi<span class="v">{kickoff}</span></div>
-    <div>Lieu<span class="v">{location}</span></div>
-    <div>Entrée<span class="v">{entry}</span></div>
+    <div class="label">Coup d'envoi</div>
+    <div class="time">{kickoff}</div>
   </div>
 </div>
 
@@ -106,28 +103,23 @@ const { kickoff, location, entry } = Astro.props;
     margin: 28px 0 22px;
   }
   .kickoff {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
+    text-align: center;
     font-family: var(--font-display);
-    font-weight: 400;
     color: var(--color-cream-soft);
+  }
+  .kickoff .label {
+    font-weight: 400;
     text-transform: uppercase;
     font-size: 13px;
-    letter-spacing: .18em;
+    letter-spacing: .22em;
+    margin-bottom: 10px;
   }
-  .kickoff > div {
-    flex: 1;
-    min-width: 0;
-  }
-  .kickoff .v {
+  .kickoff .time {
     color: #fff;
-    display: block;
-    font-size: 22px;
-    margin-top: 6px;
+    font-size: 38px;
+    font-weight: 600;
     letter-spacing: .04em;
-    font-weight: 500;
-    word-break: break-word;
+    line-height: 1;
   }
 
   @media (max-width: 960px) {
@@ -145,12 +137,8 @@ const { kickoff, location, entry } = Astro.props;
     .flag { width: 56px; height: 56px; }
     .team-name { font-size: 18px; }
     .vs { font-size: 28px; }
-    .kickoff {
-      flex-direction: column;
-      gap: 14px;
-      font-size: 12px;
-    }
-    .kickoff .v { font-size: 16px; margin-top: 4px; }
+    .kickoff .label { font-size: 11px; }
+    .kickoff .time { font-size: 30px; }
     .scoreboard hr { margin: 22px 0 18px; }
   }
 </style>
