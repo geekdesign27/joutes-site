@@ -50,6 +50,16 @@
   }
 }
 
+/* Mobile : grid de fond plus discrète (priorité au contenu) */
+@media (max-width: 960px) {
+  :root {
+    --grid-line-light: rgba(27, 36, 71, 0.06);
+    --grid-dot-light:  rgba(27, 36, 71, 0.30);
+    --grid-line-dark:  rgba(255, 255, 255, 0.06);
+    --grid-dot-dark:   rgba(255, 200, 150, 0.30);
+  }
+}
+
 /* ====================================================== */
 /*                       BASE                              */
 /* ====================================================== */

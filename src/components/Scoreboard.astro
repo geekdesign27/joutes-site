@@ -134,16 +134,23 @@ const { kickoff, location, entry } = Astro.props;
     .scoreboard {
       width: 100%;
       height: auto;
-      max-width: 400px;
+      max-width: 480px;
+      margin: 0 auto;
       padding: 28px 24px;
     }
   }
 
   @media (max-width: 480px) {
-    .scoreboard { padding: 24px 20px; }
+    .scoreboard { padding: 24px 18px; }
     .flag { width: 56px; height: 56px; }
     .team-name { font-size: 18px; }
     .vs { font-size: 28px; }
-    .kickoff .v { font-size: 18px; }
+    .kickoff {
+      flex-direction: column;
+      gap: 14px;
+      font-size: 12px;
+    }
+    .kickoff .v { font-size: 16px; margin-top: 4px; }
+    .scoreboard hr { margin: 22px 0 18px; }
   }
 </style>

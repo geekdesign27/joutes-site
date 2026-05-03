@@ -116,26 +116,44 @@ try {
   }
 
   @media (max-width: 960px) {
+    .sponsors {
+      padding: 56px 0 40px;
+    }
     .sponsors-head {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 24px;
+      height: auto;
+      transform: none;
+      margin-bottom: 48px;
     }
     .sponsors-head > div:first-child,
     .sponsors-head > p {
       grid-column: 1 / -1;
       padding-right: 0;
+      margin-top: 0;
+      max-width: none;
     }
     .sponsors h2 { font-size: 54px; }
     .sponsors h2 .sub { font-size: 28px; }
     .sponsor-grid {
-      grid-template-columns: repeat(2, var(--cell-w));
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .sponsor-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (max-width: 480px) {
-    .sponsors h2 { font-size: 42px; }
-    .sponsor-grid {
-      grid-template-columns: 1fr;
+    .sponsors {
+      padding: 40px 0 32px;
     }
+    .sponsors h2 { font-size: 40px; }
+    .sponsors h2 .sub { font-size: 22px; }
+    .sponsors-head p { font-size: 16px; }
+    .sponsors-head { margin-bottom: 32px; }
   }
 </style>

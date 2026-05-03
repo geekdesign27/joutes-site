@@ -77,19 +77,28 @@ import data from '../content/sections/match.json';
   }
 
   @media (max-width: 960px) {
+    .match { min-height: 0; }
     .match-inner {
+      padding: 56px 0;
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 32px;
+      min-height: 0;
     }
     .match-text, .match-scoreboard-wrap {
       grid-column: 1 / -1;
       padding-right: 0;
     }
     .match h2 { font-size: 56px; }
+    .match-copy { max-width: none; }
+  }
+
+  @media (max-width: 600px) {
+    .match h2 { font-size: 44px; }
   }
 
   @media (max-width: 480px) {
-    .match h2 { font-size: 42px; }
-    .match-copy { font-size: 16px; }
+    .match-inner { padding: 40px 0; }
+    .match h2 { font-size: 36px; }
+    .match-copy { font-size: 16px; margin-top: 20px; }
   }
 </style>

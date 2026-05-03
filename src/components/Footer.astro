@@ -120,6 +120,11 @@ const year = new Date().getFullYear();
     .footer-inner {
       grid-template-columns: 1fr;
       gap: 24px;
+      padding: 40px 0 24px;
+    }
+    .footer-logo {
+      width: 96px;
+      height: 96px;
     }
     .footer-social {
       text-align: left;
@@ -128,6 +133,14 @@ const year = new Date().getFullYear();
       flex-direction: column;
       gap: 8px;
       align-items: flex-start;
+      padding: 16px 0 24px;
+      font-size: 10px;
     }
+  }
+
+  @media (max-width: 480px) {
+    .footer-logo { width: 72px; height: 72px; }
+    .footer-info { font-size: 14px; }
+    .footer-social { font-size: 13px; }
   }
 </style>

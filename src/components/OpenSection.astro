@@ -21,7 +21,7 @@ import data from '../content/sections/ouvert-a-tous.json';
   .open-section {
     position: relative;
     background: var(--color-cream);
-    height: calc(var(--cell-h) * 2);
+    min-height: calc(var(--cell-h) * 2);
     padding: calc(var(--cell-h) * 0.25) 0;
     overflow: hidden;
   }
@@ -75,21 +75,31 @@ import data from '../content/sections/ouvert-a-tous.json';
   }
 
   @media (max-width: 960px) {
+    .open-section {
+      padding: 56px 0 40px;
+      min-height: 0;
+    }
     .open-inner {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 24px;
     }
     .open-head, .open-copy {
       grid-column: 1 / -1;
       padding-right: 0;
+    }
+    .open-copy {
+      margin-top: 0;
     }
     .open-section h2 { font-size: 54px; }
     .open-section h3 { font-size: 28px; }
   }
 
   @media (max-width: 480px) {
-    .open-section h2 { font-size: 42px; }
-    .open-section h3 { font-size: 24px; }
+    .open-section {
+      padding: 40px 0 32px;
+    }
+    .open-section h2 { font-size: 40px; }
+    .open-section h3 { font-size: 22px; }
     .open-copy p { font-size: 16px; }
   }
 </style>
