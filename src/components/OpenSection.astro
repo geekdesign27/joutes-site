@@ -3,16 +3,16 @@ import data from '../content/sections/ouvert-a-tous.json';
 ---
 <section class="open-section" id="programme">
   <div class="wrap open-inner">
-    <div class="open-head">
-      <div class="eyebrow">{data.eyebrow}</div>
-      <h2 set:html={data.title.replace(/\n/g, '<br/>')} />
-      <h3>{data.subtitle}</h3>
+    <div class="open-head" data-reveal-stagger>
+      <div class="eyebrow reveal">{data.eyebrow}</div>
+      <h2 class="reveal" set:html={data.title.replace(/\n/g, '<br/>')} />
+      <h3 class="reveal">{data.subtitle}</h3>
     </div>
-    <div class="open-copy">
-      <p>{data.paragraph1}</p>
-      <p>{data.paragraph2}</p>
-      <p>{data.paragraph3}</p>
-      <p><strong>{data.callout}</strong></p>
+    <div class="open-copy" data-reveal-stagger>
+      <p class="reveal">{data.paragraph1}</p>
+      <p class="reveal">{data.paragraph2}</p>
+      <p class="reveal">{data.paragraph3}</p>
+      <p class="reveal"><strong>{data.callout}</strong></p>
     </div>
   </div>
 </section>

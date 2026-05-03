@@ -36,10 +36,10 @@ const heroBgUrl = heroData.backgroundImage || '';
 
     <h1 class="hero-title-wrap">
       <span class="sr-only">{siteData.title}</span>
-      <span class="hero-title" aria-hidden="true">
-        <span class="line serif">{heroData.line1}</span>
-        <span class="line sans">{heroData.line2}</span>
-        <span class="line">
+      <span class="hero-title" aria-hidden="true" data-reveal-stagger>
+        <span class="line serif reveal">{heroData.line1}</span>
+        <span class="line sans reveal">{heroData.line2}</span>
+        <span class="line reveal">
           <span class="serif">{heroData.line3a}</span>
           <span class="spacer"> </span>
           <span class="sans">{heroData.line3b}</span>

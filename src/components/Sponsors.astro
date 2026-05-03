@@ -29,19 +29,19 @@ try {
 <section class="sponsors" id="sponsors">
   <GridBackground variant="light" />
   <div class="wrap">
-    <div class="sponsors-head">
+    <div class="sponsors-head" data-reveal-stagger>
       <div>
-        <div class="eyebrow">Partenaires</div>
-        <h2>
+        <div class="eyebrow reveal">Partenaires</div>
+        <h2 class="reveal">
           Nos sponsors
           <span class="sub">Ils nous accompagnent</span>
         </h2>
       </div>
-      <p>
+      <p class="reveal">
         Les Joutes Inter-Pompiers de la Sarine ne pourraient exister sans le soutien précieux de nos partenaires. Entreprises locales et acteurs engagés contribuent activement à la réussite de cette manifestation, en partageant des valeurs communes : engagement, solidarité et esprit d'équipe.
       </p>
     </div>
-    <div class="sponsor-grid">
+    <div class="sponsor-grid" data-reveal-stagger>
       {sponsors.map((s) => (
         <SponsorCard name={s.name} url={s.url} logo={s.logo} recolor={s.recolor} />
       ))}

@@ -6,14 +6,14 @@ import data from '../content/sections/match.json';
 <section class="match" id="match">
   <GridBackground variant="dark" />
   <div class="wrap match-inner">
-    <div class="match-text">
-      <div class="eyebrow">{data.eyebrow}</div>
-      <h2 set:html={data.title.replace(/\n/g, '<br/>')} />
-      <p class="match-copy">
+    <div class="match-text" data-reveal-stagger>
+      <div class="eyebrow reveal">{data.eyebrow}</div>
+      <h2 class="reveal" set:html={data.title.replace(/\n/g, '<br/>')} />
+      <p class="match-copy reveal">
         {data.body} <strong>{data.callout}</strong>
       </p>
     </div>
-    <div class="match-scoreboard-wrap">
+    <div class="match-scoreboard-wrap reveal-scale">
       <Scoreboard kickoff={data.kickoff} />
     </div>
   </div>

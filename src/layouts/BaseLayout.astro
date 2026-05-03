@@ -37,5 +37,33 @@ const { pageTitle, pageDescription } = Astro.props;
   {siteData.ga4Id && (
     <CookieBanner client:idle ga4Id={siteData.ga4Id} />
   )}
+
+  <script>
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets = document.querySelectorAll('.reveal, .reveal-scale');
+
+    if (reduced || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          const staggerParent = el.closest<HTMLElement>('[data-reveal-stagger]');
+          if (staggerParent) {
+            const siblings = Array.from(
+              staggerParent.querySelectorAll<HTMLElement>('.reveal, .reveal-scale')
+            );
+            const idx = siblings.indexOf(el);
+            if (idx > 0) el.style.transitionDelay = `${idx * 70}ms`;
+          }
+          el.classList.add('is-visible');
+          observer.unobserve(el);
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+      targets.forEach((el) => observer.observe(el));
+    }
+  </script>
 </body>
 </html>
