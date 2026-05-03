@@ -20,13 +20,17 @@ const heroBgUrl = heroData.backgroundImage || '';
   <GridBackground variant="dark" />
   <div class="wrap hero-inner">
     <nav class="nav">
-      <div class="nav-logo">
-        <img src="/logo.svg" alt="Logo Joutes Inter-Pompiers de la Sarine 2026" />
+      <div class="nav-logo-wrap">
+        <div class="nav-logo">
+          <img src="/logo.svg" alt="Logo Joutes Inter-Pompiers de la Sarine 2026" />
+        </div>
       </div>
-      <div class="nav-links">
-        <a href="#programme">Programme</a>
-        <a href="#match">Match Suisse-Qatar</a>
-        <a href="#sponsors">Sponsors</a>
+      <div class="nav-links-wrap">
+        <div class="nav-links">
+          <a href="#programme">Programme</a>
+          <a href="#match">Match Suisse-Qatar</a>
+          <a href="#sponsors">Sponsors</a>
+        </div>
       </div>
     </nav>
 
@@ -78,10 +82,21 @@ const heroBgUrl = heroData.backgroundImage || '';
   .nav {
     grid-column: 1 / -1;
     grid-row: 1;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-items: start;
+    padding-top: 24px;
+  }
+  .nav-logo-wrap {
+    grid-column: 1 / span 1;
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
-    padding-top: 24px;
+  }
+  .nav-links-wrap {
+    grid-column: 6 / span 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
   }
   .nav-logo {
     width: 120px;

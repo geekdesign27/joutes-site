@@ -22,24 +22,30 @@
 
 /* ====================================================== */
 /*               GRILLE — Variables CSS                     */
-/*  Approche audit : sections multiples de --cell-h         */
-/*  pour que la grille apparaisse continue sans JS.         */
-/*  R6 : aucun background-attachment fixed (bug iOS).       */
-/*  R7 : breakpoints fidèles à la maquette source.          */
+/*  Cellules calées sur les 6 colonnes du wrap (1200px max).*/
+/*  Sur viewport < 1200, la cellule rétrécit pour matcher   */
+/*  les 6 colonnes du wrap (avec padding 24px).             */
 /* ====================================================== */
 :root {
+  --wrap-max: 1200px;
+  --wrap-padding: 24px;
   --cell-w: 200px;
   --cell-h: 285px;
   --grid-line-light: rgba(27, 36, 71, 0.10);
   --grid-dot-light:  rgba(27, 36, 71, 0.55);
   --grid-line-dark:  rgba(255, 255, 255, 0.10);
   --grid-dot-dark:   rgba(255, 200, 150, 0.55);
+
+  /* Décalage horizontal pour aligner la grille sur le wrap.
+     >=1200px : grille démarre à (100vw - 1200) / 2 (bord gauche du wrap centré).
+     <1200px  : grille démarre à wrap-padding (24px). */
+  --grid-offset-x: max(var(--wrap-padding), calc((100vw - var(--wrap-max)) / 2));
 }
 
-/* Breakpoint maquette : ≤960px → cellule fluide, typo réduite */
-@media (max-width: 960px) {
+/* Breakpoint maquette : ≤1199px → cellule fluide alignée wrap */
+@media (max-width: 1199px) {
   :root {
-    --cell-w: calc(100vw / 6);
+    --cell-w: calc((100vw - var(--wrap-padding) * 2) / 6);
     --cell-h: calc(var(--cell-w) * 1.425);
   }
 }
@@ -90,7 +96,12 @@ body {
     var(--cell-w) var(--cell-h),
     var(--cell-w) var(--cell-h),
     var(--cell-w) var(--cell-h);
-  background-position: 0 0, 0 0, 0 0;
+  /* Décalage X pour aligner la grille sur le wrap.
+     Y reste à 0 : chaque section redémarre sa grille au top. */
+  background-position:
+    var(--grid-offset-x) 0,
+    var(--grid-offset-x) 0,
+    var(--grid-offset-x) 0;
   background-repeat: repeat;
 }
 
@@ -189,6 +200,5 @@ p, .body {
 }
 
 @media (max-width: 480px) {
-  /* Compensation des limites mobiles de la maquette source */
   .eyebrow { font-size: 11px; }
 }

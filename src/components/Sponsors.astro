@@ -102,13 +102,13 @@ try {
     text-wrap: pretty;
   }
 
-  /* Grille de sponsors auto-fit (R7 : peut grandir au-delà de 12) */
+  /* Grille de sponsors auto-fit alignée sur la 1re colonne du wrap */
   .sponsor-grid {
     position: relative;
     z-index: 5;
     display: grid;
     grid-template-columns: repeat(auto-fit, var(--cell-w));
-    justify-content: center;
+    justify-content: start;
   }
 
   @media (max-width: 960px) {

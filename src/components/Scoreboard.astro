@@ -29,12 +29,15 @@ const { kickoff, location, entry } = Astro.props;
 <style>
   .scoreboard {
     position: relative;
-    width: 100%;
-    max-width: 398px;
+    width: calc(var(--cell-w) * 2);
+    height: var(--cell-h);
     border: 1px solid rgba(244,217,182,.22);
     background: rgba(11,14,40,.18);
     backdrop-filter: blur(2px);
-    padding: 36px 32px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .score-row {
     display: flex;
@@ -125,6 +128,15 @@ const { kickoff, location, entry } = Astro.props;
     letter-spacing: .04em;
     font-weight: 500;
     word-break: break-word;
+  }
+
+  @media (max-width: 960px) {
+    .scoreboard {
+      width: 100%;
+      height: auto;
+      max-width: 400px;
+      padding: 28px 24px;
+    }
   }
 
   @media (max-width: 480px) {
